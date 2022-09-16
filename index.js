@@ -57,11 +57,9 @@ app.post("/api/shorturl", (req, res)=>{
     const cleaned_url = original.split("/")
     const code = Math.floor(Math.random()*101);
 
-    // set dns lookup option
-    const options = {
-        family: 4,
+    const options ={
+        family: 4
     }
-    
     // verify the url passed
     dns.lookup(cleaned_url[2], options, (err, address ,family)=>{
         if(err){
@@ -71,8 +69,9 @@ app.post("/api/shorturl", (req, res)=>{
             return console.log(err);
         } 
         else{
+            console.log(`url: ${cleaned_url}`)
             console.log(`Address: ${address}\n Family:${family}`)
-            if(cleaned_url.length === 3){
+            if(cleaned_url.length >= 3){
                  // create a new url document
                 var new_url = new Url({
                     original_url: original,

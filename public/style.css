@@ -44,3 +44,6 @@ input[type='text'] {
   width: 220px;
   text-align: center;
 }
+fieldset{
+    background:linear-gradient(45deg, rgba(0, 255, 0, 0.5), white)
+}
