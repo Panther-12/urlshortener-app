@@ -63,12 +63,12 @@ app.post("/api/shorturl", (req, res)=>{
     }
     
     // verify the url passed
-    dns.lookup(original.split("/")[2], options, (err, address ,family)=>{
+    dns.lookup(cleaned_url[2], options, (err, address ,family)=>{
         if(err){
-            return console.log(err);
             res.json({
                 error:'invalid url'
             })
+            return console.log(err);
         } 
         else{
             console.log(`Address: ${address}\n Family:${family}`)
@@ -100,15 +100,11 @@ app.post("/api/shorturl", (req, res)=>{
 
 // short site redirect route
 app.get("/api/shorturl/:short_url", (req, res)=>{
-    let params = req.params
-    
-    console.log(params);
-Url.findOne({url_code:parseInt(params.short_url)}, (err, data)=>{
+Url.findOne({url_code:parseInt(req.params.short_url)}, (err, data)=>{
         if(err){
             return console.error(err);
         }
         else{
-            console.log(data);
             return res.redirect(301, data.original_url);
         }
     })
