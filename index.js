@@ -109,7 +109,7 @@ Url.findOne({url_code:parseInt(params.short_url)}, (err, data)=>{
         }
         else{
             console.log(data);
-            res.redirect(301, data.original_url);
+            return res.redirect(301, data.original_url);
         }
     })
 })
